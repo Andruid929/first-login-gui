@@ -1,4 +1,4 @@
-package com.andrewjones;
+package com.andrewjones.logingui;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
