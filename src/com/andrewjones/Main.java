@@ -10,7 +10,7 @@ public class Main implements ActionListener {
     private static JPanel panel;
     private static JFrame frame;
     private static JTextField userText;
-    private static JLabel passwordLabel;y
+    private static JLabel passwordLabel;
     private static JPasswordField passwordText;
     private static JButton button;
 
