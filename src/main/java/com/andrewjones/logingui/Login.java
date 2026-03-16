@@ -1,22 +1,14 @@
 package com.andrewjones.logingui;
 
-import static com.andrewjones.logingui.db.DB.DATA_SOURCE;
-
-import com.andrewjones.logingui.encyption.Encryption;
+import com.andrewjones.logingui.auth.LoginAuth;
 import com.andrewjones.logingui.utils.UI;
 
-import org.jetbrains.annotations.Contract;
-
 import java.awt.event.ActionEvent;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.net.PasswordAuthentication;
 import java.sql.SQLException;
 import java.util.regex.Pattern;
 
 import javax.swing.*;
-
-import at.favre.lib.crypto.bcrypt.BCrypt;
 
 public final class Login extends JFrame {
 
@@ -30,7 +22,7 @@ public final class Login extends JFrame {
 
     public Login() {
         setTitle("Login to Andruid929");
-        setSize(350, 300);
+        setSize(300, 150);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         setLocationRelativeTo(null);
@@ -81,12 +73,8 @@ public final class Login extends JFrame {
 
     }
 
-    private Connection getDbConnection() throws SQLException {
-        return DATA_SOURCE.getConnection();
-    }
-
     private void processLoginInfo() {
-        String emailAddress = userText.getText();
+        String emailAddress = userText.getText().toLowerCase();
 
         if (!emailValidation.matcher(emailAddress).matches()) {
             JOptionPane.showMessageDialog(frame, "Please enter a valid email", "Warning", JOptionPane.ERROR_MESSAGE);
@@ -102,53 +90,29 @@ public final class Login extends JFrame {
             return;
         }
 
-        try (Connection connection = getDbConnection();) {
+        try {
+            var loginVerification = new LoginAuth(new PasswordAuthentication(emailAddress, password));
 
-            String sql = "select hashedpassword, first_name, last_name from app_user where email_address = ?";
+            if (!loginVerification.isUserFound()) {
+                JOptionPane.showMessageDialog(frame, "User not found", "Error", JOptionPane.ERROR_MESSAGE);
 
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, emailAddress);
-
-            ResultSet results = statement.executeQuery();
-
-            statement.closeOnCompletion();
-
-            boolean foundUser = false;
-
-            while (results.next()) {
-                foundUser = true;
-
-                String storedPassword = results.getString("hashedpassword");
-
-                BCrypt.Result verificationResult = Encryption.VERIFIER.verify(password, storedPassword);
-
-                if (verificationResult.verified) {
-                    String firstName = results.getString("first_name");
-                    String lastName = results.getString("last_name");
-
-                    String welcomeMessage = "Welcome, ".concat(firstName).concat(" ").concat(lastName);
-
-                    JOptionPane.showMessageDialog(frame, welcomeMessage, "Success", JOptionPane.INFORMATION_MESSAGE);
-
-                    userText.setText("");
-                    userText.grabFocus();
-
-                    passwordText.setText("");
-
-                    return;
-                }
+                return;
             }
 
-            String errorMessage = foundUser ? "Invalid password" : "User not found, make sure email is valid";
+            if (!loginVerification.isUserValidated()) {
+                JOptionPane.showMessageDialog(frame, "Invalid password, check your input", "Error", JOptionPane.ERROR_MESSAGE);
 
-            throw new SQLException(errorMessage);
+                return;
+            }
 
-        } catch (SQLException exception) {
-            JOptionPane.showMessageDialog(frame, exception.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            String firstName = loginVerification.getFirstName();
+            String lastName = loginVerification.getLastName();
 
-            passwordText.setText("");
+            String welcomeMessage = "Welcome, ".concat(firstName).concat(" ").concat(lastName);
 
-            exception.printStackTrace(System.err);
+            JOptionPane.showMessageDialog(frame, welcomeMessage, "Welcome", JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(frame, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 }

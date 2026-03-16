@@ -5,11 +5,15 @@ import static com.andrewjones.logingui.db.Secrets.*;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
+
 import javax.sql.DataSource;
 
 public final class DB {
 
-    public static final DataSource DATA_SOURCE;
+    private static final DataSource DATA_SOURCE;
 
     static {
         HikariConfig theConfig = new HikariConfig();
@@ -25,4 +29,7 @@ public final class DB {
         DATA_SOURCE = new HikariDataSource(theConfig);
     }
 
+    public static Connection getDbConnection() throws SQLException {
+        return DATA_SOURCE.getConnection();
+    }
 }
