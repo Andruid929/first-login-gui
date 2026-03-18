@@ -2,7 +2,7 @@ package com.andrewjones.logingui.encyption;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
 
-public final class Encryption {
+public final class EncryptionUtility {
 
     public static final int HASH_COST = 10;
 

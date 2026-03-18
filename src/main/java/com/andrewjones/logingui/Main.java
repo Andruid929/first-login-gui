@@ -1,5 +1,7 @@
 package com.andrewjones.logingui;
 
+import com.andrewjones.logingui.windows.Login;
+
 public class Main {
 
     public static void main(String[] args) {
