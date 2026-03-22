@@ -3,17 +3,9 @@
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.54">
     <root id="1">
       <DateStyle>mdy</DateStyle>
-      <Grants>1||-9223372036854775808|c|G
-1||10|c|G
-1||10|C|G
-1||10|T|G
-4||-9223372036854775808|c|G
-4||10|c|G
-4||10|C|G
-4||10|T|G</Grants>
-      <IntrospectionStateNumber>865</IntrospectionStateNumber>
+      <IntrospectionStateNumber>878</IntrospectionStateNumber>
       <ServerVersion>18.2</ServerVersion>
-      <StartupTime>1773646511</StartupTime>
+      <StartupTime>1774110645</StartupTime>
       <TimeZones>true ACDT
 true ACSST
 false ACST
@@ -55,14 +47,14 @@ false Africa/Blantyre
 false Africa/Brazzaville
 false Africa/Bujumbura
 false Africa/Cairo
-true Africa/Casablanca
+false Africa/Casablanca
 false Africa/Ceuta
 false Africa/Conakry
 false Africa/Dakar
 false Africa/Dar_es_Salaam
 false Africa/Djibouti
 false Africa/Douala
-true Africa/El_Aaiun
+false Africa/El_Aaiun
 false Africa/Freetown
 false Africa/Gaborone
 false Africa/Harare
@@ -814,7 +806,7 @@ false Zulu
 14813||10|C|G
 14813||-9223372036854775808|U|G
 14813||10|U|G</Grants>
-      <IntrospectionStateNumber>865</IntrospectionStateNumber>
+      <IntrospectionStateNumber>878</IntrospectionStateNumber>
       <ObjectId>5</ObjectId>
       <OwnerName>postgres</OwnerName>
     </database>
@@ -4330,11 +4322,11 @@ false Zulu
       <AutoIntrospectionLevel>3</AutoIntrospectionLevel>
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <LastIntrospectionL1Xid>865</LastIntrospectionL1Xid>
-      <LastIntrospectionL2Xid>865</LastIntrospectionL2Xid>
-      <LastIntrospectionL3Xid>865</LastIntrospectionL3Xid>
+      <LastIntrospectionL1Xid>878</LastIntrospectionL1Xid>
+      <LastIntrospectionL2Xid>878</LastIntrospectionL2Xid>
+      <LastIntrospectionL3Xid>878</LastIntrospectionL3Xid>
       <LastIntrospectionLevel>3</LastIntrospectionLevel>
-      <LastIntrospectionLocalTimestamp>2026-03-16.12:18:23</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2026-03-22.15:35:27</LastIntrospectionLocalTimestamp>
       <ObjectId>2200</ObjectId>
       <StateNumber>546</StateNumber>
       <OwnerName>pg_database_owner</OwnerName>
@@ -4342,7 +4334,7 @@ false Zulu
     <table id="273" parent="272" name="app_user">
       <DetailsLevel>2</DetailsLevel>
       <ObjectId>16423</ObjectId>
-      <StateNumber>838</StateNumber>
+      <StateNumber>877</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
@@ -4360,8 +4352,8 @@ false Zulu
     </column>
     <column id="276" parent="273" name="gender">
       <Position>3</Position>
-      <StateNumber>838</StateNumber>
-      <StoredType>varchar(10)|0s</StoredType>
+      <StateNumber>876</StateNumber>
+      <StoredType>varchar(1)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="277" parent="273" name="date_of_birth">
@@ -4378,13 +4370,13 @@ false Zulu
     </column>
     <column id="279" parent="273" name="marital_status">
       <Position>6</Position>
-      <StateNumber>838</StateNumber>
-      <StoredType>varchar(10)|0s</StoredType>
+      <StateNumber>877</StateNumber>
+      <StoredType>varchar(8)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <column id="280" parent="273" name="hashed_password">
+    <column id="280" parent="273" name="password">
       <Position>7</Position>
-      <StateNumber>864</StateNumber>
+      <StateNumber>874</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>

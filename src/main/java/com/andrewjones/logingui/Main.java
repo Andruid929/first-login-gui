@@ -1,13 +1,14 @@
 package com.andrewjones.logingui;
 
-import com.andrewjones.logingui.windows.Login;
+import com.andrewjones.logingui.windows.SignUp;
+
+import java.sql.Date;
 
 public class Main {
 
     public static void main(String[] args) {
         //Coded by Andrew using IntelliJ IDE
-
-        new Login();
+        new SignUp();
     }
 
 

@@ -2,6 +2,7 @@ package com.andrewjones.logingui.auth;
 
 import com.andrewjones.logingui.db.DB;
 import com.andrewjones.logingui.encyption.EncryptionUtility;
+import com.andrewjones.logingui.validation.Validate;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -10,15 +11,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.regex.Pattern;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
 
 public final class LoginAuth {
 
-    public static final String EMAIL_VALIDATION_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
 
-    private static final Pattern EMAIL_VALIDATION_PATTERN = Pattern.compile(EMAIL_VALIDATION_REGEX);
 
     private final boolean foundUser;
     private final boolean userValidated;
@@ -31,11 +29,11 @@ public final class LoginAuth {
         String emailAddress = credentials.getUserName();
         char[] password = credentials.getPassword();
 
-        if (!EMAIL_VALIDATION_PATTERN.matcher(emailAddress).matches()) {
+        if (Validate.invalidEmail(emailAddress)) {
             throw new IllegalArgumentException("Please enter a valid email");
         }
 
-        if (password.length < 8 || password.length > 32) {
+        if (Validate.invalidPasswordLength(password)) {
             throw new IllegalArgumentException("Invalid password length");
         }
 

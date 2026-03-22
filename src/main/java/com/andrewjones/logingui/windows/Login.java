@@ -2,17 +2,19 @@ package com.andrewjones.logingui.windows;
 
 import com.andrewjones.logingui.auth.LoginAuth;
 import com.andrewjones.logingui.dialogs.Dialogs;
+import com.andrewjones.logingui.utils.ActionKeys;
 import com.andrewjones.logingui.utils.UI;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.net.PasswordAuthentication;
 import java.sql.SQLException;
 
 import javax.swing.*;
 
-public final class Login extends JFrame {
+public final class Login extends JFrame implements WindowStep {
 
-    private JFrame frame;
+    private final JFrame frame;
 
     private JTextField userText;
 
@@ -29,7 +31,8 @@ public final class Login extends JFrame {
         setVisible(true);
     }
 
-    private void populateUi() {
+    @Override
+    public void populateUi() {
         setTitle("Login to Andruid929");
         setSize(300, 150);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -65,13 +68,23 @@ public final class Login extends JFrame {
         panel.add(success);
     }
 
-    private void setListeners() {
+    @Override
+    public void setListeners() {
         button.addActionListener(ignored -> processLoginInfo());
 
-        UI.addKeybind(this, "processInfo", new AbstractAction() {
+        UI.addKeybind(this, "processInfo", ActionKeys.ENTER_KEYSTROKE, new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 processLoginInfo();
+            }
+        });
+
+        UI.addKeybind(this, "switchToSignUp", ActionKeys.ALT_S_KEYSTROKE, new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new SignUp();
+
+                frame.dispose();
             }
         });
     }
