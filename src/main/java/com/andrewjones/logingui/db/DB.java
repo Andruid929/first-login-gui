@@ -5,7 +5,6 @@ import static com.andrewjones.logingui.db.Secrets.*;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 

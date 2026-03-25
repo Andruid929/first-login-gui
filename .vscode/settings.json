@@ -1,0 +1,15 @@
+{
+    "sqltools.connections": [
+        {
+            "ssh": "Disabled",
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 12345,
+            "askForPassword": true,
+            "driver": "PostgreSQL",
+            "name": "App user database",
+            "database": "postgres",
+            "username": "druid"
+        }
+    ]
+}
