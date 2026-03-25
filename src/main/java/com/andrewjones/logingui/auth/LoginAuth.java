@@ -39,7 +39,7 @@ public final class LoginAuth {
 
         try (Connection connection = DB.getDbConnection()) {
 
-            String sql = "SELECT hashed_password, first_name, last_name, gender FROM app_user WHERE email_address = ?";
+            String sql = "SELECT password, first_name, last_name, gender FROM app_user WHERE email_address = ?";
 
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, emailAddress);
@@ -57,7 +57,7 @@ public final class LoginAuth {
 
             foundUser = true;
 
-            String storedPassword = results.getString("hashed_password");
+            String storedPassword = results.getString("password");
 
             BCrypt.Result verificationResult = EncryptionUtility.VERIFIER.verify(password, storedPassword);
 

@@ -6,7 +6,6 @@ import com.andrewjones.logingui.utils.ActionKeys;
 import com.andrewjones.logingui.utils.UI;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 import java.net.PasswordAuthentication;
 import java.sql.SQLException;
 
@@ -115,6 +114,11 @@ public final class Login extends JFrame implements WindowStep {
             String welcomeMessage = "Welcome, ".concat(firstName).concat(" ").concat(lastName);
 
             Dialogs.showInfoDialog(frame, welcomeMessage, "Welcome");
+
+            userText.setText("");
+            passwordText.setText("");
+
+            userText.grabFocus();
 
         } catch (SQLException | IllegalArgumentException e) {
             Dialogs.showErrorDialog(frame, e.getMessage());
