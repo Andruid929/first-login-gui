@@ -11,5 +11,6 @@
             "database": "postgres",
             "username": "druid"
         }
-    ]
+    ],
+    "java.configuration.updateBuildConfiguration": "interactive"
 }

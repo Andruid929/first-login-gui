@@ -3,6 +3,7 @@ package com.andrewjones.logingui.windows;
 import com.andrewjones.logingui.auth.SignUpAuth;
 import com.andrewjones.logingui.dialogs.Dialogs;
 import com.andrewjones.logingui.form.SignUpForm;
+import com.andrewjones.logingui.migrate.MigrateActions;
 import com.andrewjones.logingui.swing.MyTextField;
 import com.andrewjones.logingui.utils.ActionKeys;
 import com.andrewjones.logingui.utils.UI;
@@ -202,6 +203,11 @@ public final class SignUp extends JFrame implements WindowStep {
             }
         });
 
+        UI.addKeybind(frame, "exportInfo", ActionKeys.ALT_E_KEYSTROKE, MigrateActions.exporterAction());
+
+
+        UI.addKeybind(frame, "importInfo", ActionKeys.ALT_I_KEYSTROKE, MigrateActions.importerAction());
+
         signUpButton.addActionListener(e -> processSignUpAttempt());
 
         for (MyTextField textField : birthInfoTrio) {
@@ -224,7 +230,7 @@ public final class SignUp extends JFrame implements WindowStep {
                     if (textField.getText().equals(PLACEHOLDER)) { //Set the placeholder text as a hint
                         textField.setSelectedTextColor(Color.GRAY);
 
-                    } else if (textField.getText().isBlank()) { //Reset blank text field to placeholder text
+                    } else if (textField.getText().isBlank()) { //Reset the blank text field to placeholder text
                         textField.setText(PLACEHOLDER);
 
                         textField.setSelectedTextColor(Color.GRAY);
